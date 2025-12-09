@@ -41,7 +41,16 @@ class LinkedList {
     head = () => this.root;
     tail = () => this.next;
 
-    at(index) { }
+    at(index) {
+        let idx = 0;
+        let rootNode = this.root;
+        while (rootNode !== null) {
+            if (idx === index) return rootNode;
+            rootNode = rootNode.nextNode;
+            idx++;
+        }
+        return null;
+    }
 
     pop() {
         const lastNode = this.next;
@@ -91,4 +100,4 @@ linkedList.append(4);
 linkedList.append(5);
 linkedList.append(53);
 // console.log(linkedList.contains(4));
-console.log(linkedList.toString());
+console.log(linkedList.at(5));
