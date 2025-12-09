@@ -13,7 +13,6 @@ class LinkedList {
     }
 
     append(val) {
-
         if (!this.root) {
             this.next = this.root = new Node(val);
             this.#listSize++;
@@ -27,13 +26,12 @@ class LinkedList {
     prepend(val) {
         if (!this.root) {
             this.next = this.root = new Node(val);
-
             this.#listSize++;
             return;
         }
-        // The current root should be "pushed" to the next node
-        // Make new root the new node
-
+        let tmp = this.root;
+        this.root = new Node(val);
+        this.root.nextNode = tmp;
         this.#listSize++;
     }
 
@@ -106,7 +104,36 @@ class LinkedList {
         }).join(' -> ');
     }
 
-    insertAt(index, val) { }
+    insertAt(index, val) {
+        let idx = 0;
+        let tmp;
+        let node = this.root;
+        while (node !== null) {
+            if (idx === (index - 1)) {
+                tmp = node.nextNode;
+                node.nextNode = new Node(val);
+                node.nextNode.nextNode = tmp;
+            }
+            node = node.nextNode;
+            idx++;
+        }
+        this.#listSize++;
+    }
 
-    removeAt(index) { }
+    removeAt(index) {
+        this.#listSize--;
+    }
 }
+
+
+const linkedList = new LinkedList();
+linkedList.append(1);
+linkedList.append(2);
+linkedList.append(3);
+linkedList.append(4);
+linkedList.append(5);
+
+// linkedList.insertAt(2, 45);
+linkedList.prepend(76);
+linkedList.prepend(100);
+console.log(linkedList.toString());
