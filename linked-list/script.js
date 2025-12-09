@@ -88,7 +88,14 @@ class LinkedList {
         return false;
     }
 
-    find(val) { }
+    find(val) {
+        let node = this.root;
+        while (node !== null) {
+            if (node.value === val) return node;
+            node = node.nextNode;
+        }
+        return null;
+    }
 
     toString() {
         let node = this.root;
@@ -137,3 +144,4 @@ linkedList.append(5);
 linkedList.prepend(76);
 linkedList.prepend(100);
 console.log(linkedList.toString());
+console.log(linkedList.find(100));
