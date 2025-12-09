@@ -6,38 +6,38 @@ class Node {
 }
 
 class LinkedList {
-    listSize = 0;
+    #listSize = 0
     constructor() {
         this.root = null;
         this.next = null;
-        this.listSize = Number(this.root);
     }
 
     append(val) {
+
         if (!this.root) {
             this.next = this.root = new Node(val);
-            this.listSize++;
+            this.#listSize++;
             return;
         }
         this.next.nextNode = new Node(val);
         this.next = this.next.nextNode;
-        this.listSize++;
+        this.#listSize++;
     }
 
     prepend(val) {
         if (!this.root) {
             this.next = this.root = new Node(val);
 
-            this.listSize++;
+            this.#listSize++;
             return;
         }
         // The current root should be "pushed" to the next node
         // Make new root the new node
 
-        this.listSize++;
+        this.#listSize++;
     }
 
-    size = () => this.listSize;
+    size = () => this.#listSize;
     head = () => this.root;
     tail = () => this.next;
 
@@ -53,10 +53,31 @@ class LinkedList {
     }
 
     pop() {
-        const lastNode = this.next;
-        this.next = null;
-        this.listSize--;
-        return lastNode;
+        if (!this.root) return null;
+
+        let node = this.root;
+        let removed;
+
+        while (node.nextNode !== null) {
+            if (node.nextNode.nextNode === null) {
+                removed = node.nextNode;
+                node.nextNode = null;
+                this.#listSize--;
+                return;
+            }
+            node = node.nextNode;
+        }
+        return null;
+    }
+
+    getNodes() {
+        let node = this.root;
+        const nodes = [];
+        while (node !== null) {
+            nodes.push(node);
+            node = node.nextNode;
+        }
+        return nodes;
     }
 
     contains(val) {
@@ -85,19 +106,7 @@ class LinkedList {
         }).join(' -> ');
     }
 
-    insertAt(index, val) {
-
-    }
+    insertAt(index, val) { }
 
     removeAt(index) { }
 }
-
-const linkedList = new LinkedList();
-linkedList.append(1);
-linkedList.append(2);
-linkedList.append(3);
-linkedList.append(4);
-linkedList.append(5);
-linkedList.append(53);
-// console.log(linkedList.contains(4));
-console.log(linkedList.at(5));
