@@ -56,16 +56,15 @@ class LinkedList {
         let node = this.root;
         let removed;
 
-        while (node.nextNode !== null) {
-            if (node.nextNode.nextNode === null) {
-                removed = node.nextNode;
-                node.nextNode = null;
-                this.#listSize--;
-                return;
-            }
+        while (node !== this.next) {
             node = node.nextNode;
         }
-        return null;
+
+        removed = node.nextNode;
+        node.nextNode = null;
+        this.next = node;
+    
+        return removed;
     }
 
     getNodes() {
