@@ -67,15 +67,7 @@ class LinkedList {
         return removed;
     }
 
-    getNodes() {
-        let node = this.root;
-        const nodes = [];
-        while (node !== null) {
-            nodes.push(node);
-            node = node.nextNode;
-        }
-        return nodes;
-    }
+    getNodes = () => this;
 
     contains(val) {
         let rootNode = this.root;
